@@ -17,6 +17,7 @@ public class Server extends JFrame {
 
     public Server() throws IOException {
         setTitle("Server");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(Server);
 
         startButton.addActionListener(new ActionListener() {

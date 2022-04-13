@@ -19,15 +19,15 @@
           <component id="b5f1e" class="javax.swing.JTextArea" binding="msg_Group">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="300" height="400"/>
+                <preferred-size width="500" height="550"/>
               </grid>
             </constraints>
             <properties>
-              <editable value="true"/>
+              <editable value="false"/>
               <enabled value="true"/>
               <font name="JetBrains Mono" size="14" style="3"/>
               <lineWrap value="true"/>
-              <rows value="20"/>
+              <rows value="0"/>
               <text value=""/>
               <wrapStyleWord value="true"/>
             </properties>

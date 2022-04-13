@@ -40,7 +40,6 @@ public class Client extends JFrame {
                     bufferedWriter.flush();
                     msgTextField.setText("");
                     msg_Group.setText(msg_Group.getText() + "\nYou: " + msgSend);
-                    msg_Group.setTabSize(10);
                     pack();
                 }catch (IOException f){
                     f.printStackTrace();
