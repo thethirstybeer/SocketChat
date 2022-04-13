@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Client extends JFrame {
     private JPanel Client;
@@ -18,6 +17,7 @@ public class Client extends JFrame {
 
     public Client(Socket socket, String username) throws IOException {
         setTitle("Client");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(Client);
         pack();
         setVisible(true);
@@ -40,6 +40,7 @@ public class Client extends JFrame {
                     bufferedWriter.flush();
                     msgTextField.setText("");
                     msg_Group.setText(msg_Group.getText() + "\nYou: " + msgSend);
+                    msg_Group.setTabSize(10);
                     pack();
                 }catch (IOException f){
                     f.printStackTrace();

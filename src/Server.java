@@ -11,7 +11,7 @@ public class Server extends JFrame {
     private JTextField textPort;
     private JButton startButton;
     private JButton stopButton;
-    private JList listUser;
+    private  JList listUser;
     private ServerSocket serverSocket;
     public static ArrayList<String> userOnlines = new ArrayList<String>();
 
@@ -35,6 +35,7 @@ public class Server extends JFrame {
                                 Socket socket = serverSocket.accept();
                                 System.out.println("A new Client");
                                 ClientHandler clientHandler = new ClientHandler(socket);
+                                updateUserOnline(clientHandler.getArrayName());
                                 Thread thread = new Thread(clientHandler);
                                 thread.start();
                             }
@@ -62,7 +63,18 @@ public class Server extends JFrame {
     }
 
     public void updateUserOnline(ArrayList<String> arrayList){
-        listUser.setListData(arrayList.toArray());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!serverSocket.isClosed()){
+                    listUser.setListData(arrayList.toArray());
+                    if(serverSocket.isClosed()){
+                        break;
+                    }
+                }
+            }
+        }).start();
+
     }
 
     public static void main(String[] args) throws IOException {
