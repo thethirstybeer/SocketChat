@@ -13,7 +13,8 @@ public class Server extends JFrame {
     private JButton stopButton;
     private  JList listUser;
     private ServerSocket serverSocket;
-    public static ArrayList<String> userOnlines = new ArrayList<String>();
+//    private ArrayList<String> userOnlines = new ArrayList<String>();
+    String[] array = {"Lisa"};
 
     public Server() throws IOException {
         setTitle("Server");
@@ -53,7 +54,7 @@ public class Server extends JFrame {
                 try {
                     serverSocket.close();
                     JOptionPane.showMessageDialog(null, "Server is close");
-                    System.exit(1);
+                    ClientHandler clientHandler = new ClientHandler();
                 }catch (IOException f){
 
                 }
@@ -67,9 +68,12 @@ public class Server extends JFrame {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                String[] empty = {};
                 while (!serverSocket.isClosed()){
                     listUser.setListData(arrayList.toArray());
+                    pack();
                     if(serverSocket.isClosed()){
+                        listUser.setListData(empty);
                         break;
                     }
                 }

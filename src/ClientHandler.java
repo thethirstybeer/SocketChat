@@ -6,10 +6,16 @@ import java.util.ArrayList;
 public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<ClientHandler>();
     public static ArrayList<String> usersName = new ArrayList<String>();
+//    public static ArrayList<String> empty = new ArrayList<String>();
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String usernameClient;
+
+    public ClientHandler() throws IOException{
+        sendMsg("Server disconnecting please Exit Application");
+        clientHandlers.removeAll(clientHandlers);
+    }
 
 
     public ClientHandler(Socket socket) throws IOException {

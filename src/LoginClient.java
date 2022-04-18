@@ -9,6 +9,7 @@ public class LoginClient extends JFrame {
     private JTextField textName;
     private JTextField textPort;
     private JButton loginButton;
+    private JButton clearButton;
 
     public LoginClient(){
         setTitle("Login");
@@ -28,6 +29,13 @@ public class LoginClient extends JFrame {
 
                     }
                 }
+            }
+        });
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textPort.setText("");
+                textName.setText("");
             }
         });
     }

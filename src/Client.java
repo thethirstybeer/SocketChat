@@ -3,8 +3,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Client extends JFrame {
+    public static ArrayList<String> listName = new ArrayList<>();
     private JPanel Client;
     private JTextField msgTextField;
     private JButton sendMessageButton;
@@ -57,7 +59,6 @@ public class Client extends JFrame {
                 while (socket.isConnected()){
                     try {
                         msgGroup = bufferedReader.readLine();
-                        System.out.println(msgGroup);
                         msg_Group.setText(msg_Group.getText() + "\n" + msgGroup);
                         pack();
                     }catch (IOException e){
@@ -67,6 +68,7 @@ public class Client extends JFrame {
             }
         }).start();
     }
+
     public void closeClient(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
         try {
             if(bufferedReader != null){
