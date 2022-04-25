@@ -13,8 +13,8 @@ public class Server extends JFrame {
     private JButton stopButton;
     private  JList listUser;
     private ServerSocket serverSocket;
-//    private ArrayList<String> userOnlines = new ArrayList<String>();
-    String[] array = {"Lisa"};
+    private ArrayList<String> userOnlines;
+
 
     public Server() throws IOException {
         setTitle("Server");
@@ -28,9 +28,6 @@ public class Server extends JFrame {
                     @Override
                     public void run() {
                         try{
-                            if(textPort.getText().equals("")){
-                                JOptionPane.showMessageDialog(null, "Please input Port ?");
-                            }
                             JOptionPane.showMessageDialog(null, "Server is running!");
                             serverSocket = new ServerSocket(Integer.parseInt(textPort.getText()));
                             while (true){
@@ -54,7 +51,7 @@ public class Server extends JFrame {
                 try {
                     serverSocket.close();
                     JOptionPane.showMessageDialog(null, "Server is close");
-                    ClientHandler clientHandler = new ClientHandler();
+                    ClientHandler clientHandler = new ClientHandler("Server disconnecting please Exit Application");
                 }catch (IOException f){
 
                 }
@@ -63,6 +60,7 @@ public class Server extends JFrame {
         pack();
         setVisible(true);
     }
+
 
     public void updateUserOnline(ArrayList<String> arrayList){
         new Thread(new Runnable() {

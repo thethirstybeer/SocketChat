@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.Socket;
+import java.security.Key;
 import java.util.ArrayList;
 
 public class Client extends JFrame {
@@ -11,6 +13,7 @@ public class Client extends JFrame {
     private JTextField msgTextField;
     private JButton sendMessageButton;
     private JTextArea msg_Group;
+    private JButton buttonFlie;
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -49,6 +52,12 @@ public class Client extends JFrame {
 
             }
         });
+        buttonFlie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public void listenMsg(){
@@ -84,5 +93,4 @@ public class Client extends JFrame {
             e.printStackTrace();
         }
     }
-
 }

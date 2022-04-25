@@ -12,9 +12,13 @@ public class ClientHandler implements Runnable{
     private BufferedWriter bufferedWriter;
     private String usernameClient;
 
-    public ClientHandler() throws IOException{
-        sendMsg("Server disconnecting please Exit Application");
+    public ClientHandler(String msg) throws IOException{
+        sendMsg(msg);
         clientHandlers.removeAll(clientHandlers);
+    }
+
+    public ClientHandler(){
+
     }
 
 
@@ -27,6 +31,7 @@ public class ClientHandler implements Runnable{
         usersName.add(this.usernameClient);
         sendMsg("Server: " + usernameClient + " entered room");
     }
+
 
     public void sendMsg(String msg){
         for(int i = 0; i < clientHandlers.size(); i++){
