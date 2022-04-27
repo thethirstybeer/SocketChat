@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class LoginClient extends JFrame {
     private JPanel panel1;
@@ -10,6 +11,7 @@ public class LoginClient extends JFrame {
     private JTextField textPort;
     private JButton loginButton;
     private JButton clearButton;
+    public static ArrayList<String> listUser = new ArrayList<>();
 
     public LoginClient(){
         setTitle("Login");
@@ -22,6 +24,7 @@ public class LoginClient extends JFrame {
                 if(!textName.getText().equals("") && !textPort.getText().equals("")){
                     try {
                         setVisible(false);
+                        System.out.println(listUser.size());
                         Socket socket = new Socket("localhost", Integer.parseInt(textPort.getText()));
                         Client client = new Client(socket, textName.getText());
                         client.listenMsg();

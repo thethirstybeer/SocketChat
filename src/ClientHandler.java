@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<ClientHandler>();
     public static ArrayList<String> usersName = new ArrayList<String>();
-//    public static ArrayList<String> empty = new ArrayList<String>();
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -29,6 +28,7 @@ public class ClientHandler implements Runnable{
         this.usernameClient = bufferedReader.readLine();
         clientHandlers.add(this);
         usersName.add(this.usernameClient);
+        writeFile();
         sendMsg("Server: " + usernameClient + " entered room");
     }
 
@@ -45,6 +45,10 @@ public class ClientHandler implements Runnable{
                 }
             }
         }
+    }
+
+    public void sendFile(){
+
     }
 
     public void closeClient(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
@@ -94,5 +98,14 @@ public class ClientHandler implements Runnable{
 
     public ArrayList<String> getArrayName(){
         return usersName;
+    }
+
+    public void writeFile() throws IOException{
+        PrintWriter printWriter = new PrintWriter("D:\\Java\\Chat One Thread\\src\\Users.txt");
+        for (int i = 0; i < usersName.size(); i++) {
+            printWriter.println(usersName.get(i));
+        }
+        printWriter.close();
+
     }
 }

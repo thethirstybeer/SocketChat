@@ -20,7 +20,6 @@ public class Server extends JFrame {
         setTitle("Server");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(Server);
-
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -28,15 +27,22 @@ public class Server extends JFrame {
                     @Override
                     public void run() {
                         try{
-                            JOptionPane.showMessageDialog(null, "Server is running!");
-                            serverSocket = new ServerSocket(Integer.parseInt(textPort.getText()));
-                            while (true){
-                                Socket socket = serverSocket.accept();
-                                System.out.println("A new Client");
-                                ClientHandler clientHandler = new ClientHandler(socket);
-                                updateUserOnline(clientHandler.getArrayName());
-                                Thread thread = new Thread(clientHandler);
-                                thread.start();
+                            if(!textPort.getText().equals("")){
+                                textPort.setEnabled(false);
+                                JOptionPane.showMessageDialog(null, "Server is running!");
+                                serverSocket = new ServerSocket(Integer.parseInt(textPort.getText()));
+                                stopButton.setEnabled(true);
+                                startButton.setEnabled(false);
+                                while (true){
+                                    Socket socket = serverSocket.accept();
+                                    System.out.println("A new Client");
+                                    ClientHandler clientHandler = new ClientHandler(socket);
+                                    updateUserOnline(clientHandler.getArrayName());
+                                    Thread thread = new Thread(clientHandler);
+                                    thread.start();
+                                }
+                            }else {
+                                JOptionPane.showMessageDialog(null, "Please Input Port !");
                             }
                         }catch (IOException f){
 
@@ -49,8 +55,11 @@ public class Server extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    serverSocket.close();
                     JOptionPane.showMessageDialog(null, "Server is close");
+                    textPort.setEnabled(true);
+                    startButton.setEnabled(true);
+                    stopButton.setEnabled(false);
+                    serverSocket.close();
                     ClientHandler clientHandler = new ClientHandler("Server disconnecting please Exit Application");
                 }catch (IOException f){
 

@@ -1,11 +1,13 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.Socket;
-import java.security.Key;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Client extends JFrame {
     public static ArrayList<String> listName = new ArrayList<>();
@@ -13,7 +15,6 @@ public class Client extends JFrame {
     private JTextField msgTextField;
     private JButton sendMessageButton;
     private JTextArea msg_Group;
-    private JButton buttonFlie;
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -21,11 +22,14 @@ public class Client extends JFrame {
     private JScrollPane jScrollPane;
 
     public Client(Socket socket, String username) throws IOException {
-        setTitle("Client");
+        setTitle("Client-" + username);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(Client);
         pack();
         setVisible(true);
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\Ninh PC\\Desktop\\send.png");
+        sendMessageButton.setIcon(imageIcon);
+        sendMessageButton.setMnemonic(KeyEvent.VK_B);
         this.socket = socket;
         this.username = username;
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -52,10 +56,45 @@ public class Client extends JFrame {
 
             }
         });
-        buttonFlie.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+//        sendMessageButton.addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//                int c = e.getKeyCode();
+//                System.out.println(c);
+//                String msgSend = "";
+//                if(c == KeyEvent.VK_ENTER){
+//                    try {
+//                        msgSend = msgTextField.getText();
+//                        bufferedWriter.write(username + ": " + msgSend);
+//                        bufferedWriter.newLine();
+//                        bufferedWriter.flush();
+//                        msgTextField.setText("");
+//                        msg_Group.setText(msg_Group.getText() + "\nYou: " + msgSend);
+//                        pack();
+//                    }catch (IOException f){
+//                        f.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
 
+        msgTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                String msgSend = "";
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    try {
+                        msgSend = msgTextField.getText();
+                        bufferedWriter.write(username + ": " + msgSend);
+                        bufferedWriter.newLine();
+                        bufferedWriter.flush();
+                        msgTextField.setText("");
+                        msg_Group.setText(msg_Group.getText() + "\nYou: " + msgSend);
+                        pack();
+                    }catch (IOException f){
+                        f.printStackTrace();
+                    }
+                }
             }
         });
     }
