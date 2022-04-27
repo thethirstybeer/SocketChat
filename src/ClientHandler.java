@@ -28,7 +28,6 @@ public class ClientHandler implements Runnable{
         this.usernameClient = bufferedReader.readLine();
         clientHandlers.add(this);
         usersName.add(this.usernameClient);
-        writeFile();
         sendMsg("Server: " + usernameClient + " entered room");
     }
 
@@ -100,12 +99,5 @@ public class ClientHandler implements Runnable{
         return usersName;
     }
 
-    public void writeFile() throws IOException{
-        PrintWriter printWriter = new PrintWriter("D:\\Java\\Chat One Thread\\src\\Users.txt");
-        for (int i = 0; i < usersName.size(); i++) {
-            printWriter.println(usersName.get(i));
-        }
-        printWriter.close();
 
-    }
 }
