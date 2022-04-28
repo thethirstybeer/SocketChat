@@ -24,7 +24,6 @@ public class LoginClient extends JFrame {
                 if(!textName.getText().equals("") && !textPort.getText().equals("")){
                     try {
                         setVisible(false);
-                        System.out.println(listUser.size());
                         Socket socket = new Socket("localhost", Integer.parseInt(textPort.getText()));
                         Client client = new Client(socket, textName.getText());
                         client.listenMsg();

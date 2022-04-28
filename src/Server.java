@@ -29,20 +29,19 @@ public class Server extends JFrame {
                         try{
                             if(!textPort.getText().equals("")){
                                 textPort.setEnabled(false);
-                                JOptionPane.showMessageDialog(null, "Server is running!");
+                                JOptionPane.showMessageDialog(null, "Chạy Server tại cổng: " + textPort.getText() + " thành công.");
                                 serverSocket = new ServerSocket(Integer.parseInt(textPort.getText()));
                                 stopButton.setEnabled(true);
                                 startButton.setEnabled(false);
                                 while (true){
                                     Socket socket = serverSocket.accept();
-                                    System.out.println("A new Client");
                                     ClientHandler clientHandler = new ClientHandler(socket);
                                     updateUserOnline(clientHandler.getArrayName());
                                     Thread thread = new Thread(clientHandler);
                                     thread.start();
                                 }
                             }else {
-                                JOptionPane.showMessageDialog(null, "Please Input Port !");
+                                JOptionPane.showMessageDialog(null, "Vui lòng nhập Port!");
                             }
                         }catch (IOException f){
 
@@ -55,12 +54,12 @@ public class Server extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    JOptionPane.showMessageDialog(null, "Server is close");
+                    JOptionPane.showMessageDialog(null, "Ngắt kết nối Server thành công !");
                     textPort.setEnabled(true);
                     startButton.setEnabled(true);
                     stopButton.setEnabled(false);
                     serverSocket.close();
-                    ClientHandler clientHandler = new ClientHandler("Server disconnecting please Exit Application");
+                    ClientHandler clientHandler = new ClientHandler("Server đang bảo trì vui lòng thoát chương trình và đăng nhập lại.");
                 }catch (IOException f){
 
                 }

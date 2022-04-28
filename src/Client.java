@@ -27,7 +27,7 @@ public class Client extends JFrame {
         add(Client);
         pack();
         setVisible(true);
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\Ninh PC\\Desktop\\send.png");
+        ImageIcon imageIcon = new ImageIcon("D:\\Java\\Chat One Thread\\Image\\send.png");
         sendMessageButton.setIcon(imageIcon);
         sendMessageButton.setMnemonic(KeyEvent.VK_B);
         this.socket = socket;
@@ -56,28 +56,6 @@ public class Client extends JFrame {
 
             }
         });
-//        sendMessageButton.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyTyped(KeyEvent e) {
-//                int c = e.getKeyCode();
-//                System.out.println(c);
-//                String msgSend = "";
-//                if(c == KeyEvent.VK_ENTER){
-//                    try {
-//                        msgSend = msgTextField.getText();
-//                        bufferedWriter.write(username + ": " + msgSend);
-//                        bufferedWriter.newLine();
-//                        bufferedWriter.flush();
-//                        msgTextField.setText("");
-//                        msg_Group.setText(msg_Group.getText() + "\nYou: " + msgSend);
-//                        pack();
-//                    }catch (IOException f){
-//                        f.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-
         msgTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {

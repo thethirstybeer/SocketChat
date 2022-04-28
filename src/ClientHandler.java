@@ -20,7 +20,6 @@ public class ClientHandler implements Runnable{
 
     }
 
-
     public ClientHandler(Socket socket) throws IOException {
         this.socket = socket;
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -28,7 +27,7 @@ public class ClientHandler implements Runnable{
         this.usernameClient = bufferedReader.readLine();
         clientHandlers.add(this);
         usersName.add(this.usernameClient);
-        sendMsg("Server: " + usernameClient + " entered room");
+        sendMsg("Server: " + usernameClient + " đã vào phòng.");
     }
 
 
@@ -70,7 +69,7 @@ public class ClientHandler implements Runnable{
     public void removeClient(){
         clientHandlers.remove(this);
         usersName.remove(usernameClient);
-        sendMsg("Server: " + usernameClient + " out room!");
+        sendMsg("Server: " + usernameClient + " đã thoát khỏi phòng!");
     }
 
     public String getName(){
