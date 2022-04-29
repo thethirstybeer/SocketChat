@@ -27,7 +27,7 @@ public class Client extends JFrame {
         add(Client);
         pack();
         setVisible(true);
-        ImageIcon imageIcon = new ImageIcon("D:\\Java\\Chat One Thread\\Image\\send.png");
+        ImageIcon imageIcon = new ImageIcon("Image\\send.png");
         sendMessageButton.setIcon(imageIcon);
         sendMessageButton.setMnemonic(KeyEvent.VK_B);
         this.socket = socket;
